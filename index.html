@@ -53,6 +53,7 @@
     background:linear-gradient(160deg, #6f8f52, #4b6b3f 60%, #33492b);
     border-radius:32px;
     box-shadow:0 20px 40px rgba(0,0,0,0.25);
+    animation:dropIn 0.8s ease-out both;
   }
 
   .frame::before, .frame::after{
@@ -72,8 +73,8 @@
     filter:drop-shadow(0 6px 8px rgba(0,0,0,0.25));
     pointer-events:none;
   }
-  .compass{ top:-22px; left:-14px; transform:rotate(-12deg); }
-  .chest{ top:-18px; right:-14px; transform:rotate(10deg); }
+  .compass{ top:-22px; left:-14px; animation:spinIn 0.9s 0.1s ease-out both; }
+  .chest{ top:-18px; right:-14px; animation:popIn 0.9s 0.3s ease-out both; }
 
   .card{
     position:relative;
@@ -90,7 +91,7 @@
     margin-bottom:22px;
   }
 
-  .cake{ font-size:2rem; display:block; margin-bottom:2px; }
+  .cake{ font-size:2rem; display:block; margin-bottom:2px; animation:popCake 0.6s 0.15s ease-out both; }
 
   h1{
     font-family:"Baloo 2", sans-serif;
@@ -100,6 +101,7 @@
     margin:4px 0 14px;
     color:var(--brown-dark);
     text-shadow:1px 1px 0 rgba(255,255,255,0.5);
+    animation:fadeInUp 0.7s 0.25s ease-out both;
   }
 
   .subtitle{
@@ -112,6 +114,7 @@
     letter-spacing:1px;
     color:var(--brown);
     font-size:0.9rem;
+    animation:fadeInUp 0.7s 0.55s ease-out both;
   }
 
   .section{
@@ -121,8 +124,13 @@
     padding:18px 18px 16px;
     margin-bottom:18px;
   }
-  .section:nth-child(odd){ transform:rotate(-0.4deg); }
-  .section:nth-child(even){ transform:rotate(0.4deg); }
+  .section:nth-child(odd){ animation:fadeInUpL 0.6s ease-out both; }
+  .section:nth-child(even){ animation:fadeInUpR 0.6s ease-out both; }
+  .section:nth-child(1){ animation-delay:0.65s; }
+  .section:nth-child(2){ animation-delay:0.85s; }
+  .section:nth-child(3){ animation-delay:1.05s; }
+  .section:nth-child(4){ animation-delay:1.25s; }
+  .section:nth-child(5){ animation-delay:1.45s; }
 
   h2{
     display:flex;
@@ -171,10 +179,73 @@
     text-align:center;
     color:#fff;
     box-shadow:0 6px 14px rgba(0,0,0,0.15);
+    cursor:pointer;
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
   }
+  .score-item:hover{ transform:translateY(-4px) scale(1.03); box-shadow:0 12px 22px rgba(0,0,0,0.25); }
+  .score-item:active{ transform:scale(0.96); }
   .score-item .emoji{ font-size:1.9rem; display:block; margin-bottom:6px; }
   .score-item .pts{ font-size:0.85rem; font-weight:600; opacity:0.95; }
   .score-item .place{ font-size:1.15rem; font-weight:800; margin-top:4px; }
+  .score-item .hint{ display:block; font-size:0.68rem; margin-top:6px; opacity:0.9; letter-spacing:0.5px; }
+
+  .modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(20,14,8,0.72);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:200;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 0.25s ease;
+  }
+  .modal-overlay.open{ opacity:1; pointer-events:auto; }
+
+  .modal-card{
+    background:var(--paper);
+    border-radius:22px;
+    max-width:420px;
+    width:100%;
+    overflow:hidden;
+    box-shadow:0 24px 50px rgba(0,0,0,0.4);
+    transform:scale(0.9) translateY(12px);
+    transition:transform 0.25s ease;
+    position:relative;
+  }
+  .modal-overlay.open .modal-card{ transform:scale(1) translateY(0); }
+
+  .modal-card img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+    display:block;
+  }
+
+  .modal-caption{ padding:16px 20px 22px; text-align:center; }
+  .modal-title{ font-size:1.25rem; font-weight:800; color:var(--brown-dark); margin-bottom:8px; }
+  .modal-desc{ font-size:0.92rem; color:var(--ink); line-height:1.8; }
+
+  .modal-close{
+    position:absolute;
+    top:10px;
+    right:10px;
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    border:none;
+    background:rgba(0,0,0,0.45);
+    color:#fff;
+    font-size:1.3rem;
+    line-height:1;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:2;
+  }
 
   .island{ background:linear-gradient(160deg,#4bb4d1,#2c7fa0); }
   .mountain{ background:linear-gradient(160deg,#7fae5a,#4c7a3f); }
@@ -209,6 +280,7 @@
     color:var(--brown-dark);
     line-height:1.9;
     font-size:0.95rem;
+    animation:fadeInUp 0.7s 1.65s ease-out both;
   }
 
   .start{
@@ -224,6 +296,51 @@
     border-radius:12px;
     box-shadow:0 5px 0 #4a2f18, 0 10px 18px rgba(0,0,0,0.25);
     font-style:normal;
+    animation:bounceIn 0.7s 1.9s ease-out both;
+    cursor:pointer;
+    user-select:none;
+    transition:transform 0.15s ease, filter 0.15s ease;
+  }
+  .start:hover{ filter:brightness(1.08); }
+  .start:active{ transform:scale(0.94); }
+
+  .adventurer{
+    position:fixed;
+    left:0;
+    top:0;
+    font-size:2.1rem;
+    z-index:80;
+    opacity:0;
+    pointer-events:none;
+    filter:drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+    will-change:transform, opacity;
+  }
+  .adventurer::after{
+    content:"💨";
+    position:absolute;
+    left:-16px;
+    top:8px;
+    font-size:1.1rem;
+    opacity:0;
+  }
+  .adventurer.run{
+    animation:runOff 1.9s cubic-bezier(.34,.6,.4,1) forwards;
+  }
+  .adventurer.run::after{
+    animation:dustFade 1.9s ease-out forwards;
+  }
+
+  @keyframes runOff{
+    0%{ opacity:0; transform:translate(0,0) scale(0.6) rotate(0deg); }
+    10%{ opacity:1; transform:translate(-4px,-10px) scale(1) rotate(-6deg); }
+    30%{ opacity:1; transform:translate(50px,-55px) scale(1.05) rotate(8deg); }
+    60%{ opacity:1; transform:translate(150px,-100px) scale(0.8) rotate(10deg); }
+    100%{ opacity:0; transform:translate(280px,-170px) scale(0.1) rotate(16deg); }
+  }
+  @keyframes dustFade{
+    0%{ opacity:0; }
+    15%{ opacity:0.85; }
+    100%{ opacity:0; }
   }
 
   .credit{
@@ -233,15 +350,77 @@
     font-size:0.8rem;
     letter-spacing:1px;
     font-style:italic;
+    animation:fadeInUp 0.6s 2.1s ease-out both;
   }
 
   @media (max-width:420px){
     h1{ font-size:1.7rem; }
     .compass, .chest{ font-size:40px; }
   }
+
+  @keyframes dropIn{
+    0%{ opacity:0; transform:translateY(-50px) scale(0.94); }
+    60%{ opacity:1; transform:translateY(6px) scale(1.01); }
+    100%{ opacity:1; transform:translateY(0) scale(1); }
+  }
+  @keyframes spinIn{
+    0%{ opacity:0; transform:rotate(-200deg) scale(0.2); }
+    70%{ opacity:1; transform:rotate(2deg) scale(1.1); }
+    100%{ opacity:1; transform:rotate(-12deg) scale(1); }
+  }
+  @keyframes popIn{
+    0%{ opacity:0; transform:rotate(80deg) scale(0.2); }
+    70%{ opacity:1; transform:rotate(4deg) scale(1.12); }
+    100%{ opacity:1; transform:rotate(10deg) scale(1); }
+  }
+  @keyframes popCake{
+    0%{ opacity:0; transform:scale(0) rotate(-25deg); }
+    60%{ opacity:1; transform:scale(1.2) rotate(8deg); }
+    100%{ opacity:1; transform:scale(1) rotate(0deg); }
+  }
+  @keyframes fadeInUp{
+    0%{ opacity:0; transform:translateY(24px); }
+    100%{ opacity:1; transform:translateY(0); }
+  }
+  @keyframes fadeInUpL{
+    0%{ opacity:0; transform:translateY(24px) rotate(-0.4deg); }
+    100%{ opacity:1; transform:translateY(0) rotate(-0.4deg); }
+  }
+  @keyframes fadeInUpR{
+    0%{ opacity:0; transform:translateY(24px) rotate(0.4deg); }
+    100%{ opacity:1; transform:translateY(0) rotate(0.4deg); }
+  }
+  @keyframes bounceIn{
+    0%{ opacity:0; transform:scale(0.5) translateY(10px); }
+    60%{ opacity:1; transform:scale(1.08) translateY(-4px); }
+    100%{ opacity:1; transform:scale(1) translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{
+      animation-duration:0.001ms !important;
+      animation-delay:0s !important;
+      animation-iteration-count:1 !important;
+    }
+  }
 </style>
 </head>
 <body>
+
+  <div class="adventurer" id="adventurer">🏃‍♀️</div>
+
+  <audio id="bgm" src="music/theme.mp3" loop preload="auto"></audio>
+
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" aria-label="關閉">&times;</button>
+      <img id="modalImg" src="" alt="">
+      <div class="modal-caption">
+        <div class="modal-title" id="modalTitle"></div>
+        <div class="modal-desc" id="modalDesc"></div>
+      </div>
+    </div>
+  </div>
 
   <div class="frame">
     <span class="compass">🧭</span>
@@ -278,20 +457,23 @@
       <div class="section">
         <h2>✈️ 旅行獎勵</h2>
         <div class="score">
-          <div class="score-item island">
+          <div class="score-item island" data-dest="phuquoc">
             <span class="emoji">🏝️</span>
             <span class="pts">6 分以上</span>
             <span class="place">富國島旅行</span>
+            <span class="hint">👆 點我看看</span>
           </div>
-          <div class="score-item mountain">
+          <div class="score-item mountain" data-dest="huadong">
             <span class="emoji">🌄</span>
             <span class="pts">3 分以上</span>
             <span class="place">花東旅行</span>
+            <span class="hint">👆 點我看看</span>
           </div>
-          <div class="score-item lantern">
+          <div class="score-item lantern" data-dest="tainan">
             <span class="emoji">🏮</span>
             <span class="pts">1 分以上</span>
             <span class="place">台南旅行</span>
+            <span class="hint">👆 點我看看</span>
           </div>
         </div>
       </div>
@@ -318,7 +500,7 @@
       <div class="footer">
         真正的寶藏，或許不是便利貼。<br>
         而是我們一起完成這場生日冒險的回憶。
-        <div class="start">🚀 旅程，正式開始！</div>
+        <div class="start" id="startBtn">🚀 旅程，正式開始！</div>
       </div>
 
       <div class="credit">Made with love by 維庭 ❤️</div>
@@ -326,5 +508,98 @@
     </div>
   </div>
 
+  <script>
+    var startBtn = document.getElementById('startBtn');
+    var adventurer = document.getElementById('adventurer');
+
+    if(startBtn && adventurer){
+      startBtn.addEventListener('click', function(){
+        var rect = startBtn.getBoundingClientRect();
+        adventurer.style.left = (rect.left + rect.width / 2 - 17) + 'px';
+        adventurer.style.top = (rect.top - 6) + 'px';
+
+        adventurer.classList.remove('run');
+        void adventurer.offsetWidth; // restart animation on repeat clicks
+        adventurer.classList.add('run');
+      });
+
+      adventurer.addEventListener('animationend', function(){
+        adventurer.classList.remove('run');
+      });
+    }
+
+    var destinations = {
+      phuquoc: {
+        img:'images/phuquoc.jpg',
+        title:'🏝️ 富國島旅行',
+        desc:'越南最大島嶼，搭上跨海纜車俯瞰整片藍海，夕陽超美。'
+      },
+      huadong: {
+        img:'images/huadong.jpg',
+        title:'🌄 花東旅行・三仙台',
+        desc:'跨海拱橋踏浪而行，湛藍太平洋近在腳下。'
+      },
+      tainan: {
+        img:'images/tainan.jpg',
+        title:'🏮 台南旅行',
+        desc:'百年府城老街，華燈初上最有味道的小旅行。'
+      }
+    };
+
+    var modalOverlay = document.getElementById('modalOverlay');
+    var modalImg = document.getElementById('modalImg');
+    var modalTitle = document.getElementById('modalTitle');
+    var modalDesc = document.getElementById('modalDesc');
+    var modalClose = document.getElementById('modalClose');
+
+    function openModal(key){
+      var d = destinations[key];
+      if(!d) return;
+      modalImg.src = d.img;
+      modalImg.alt = d.title;
+      modalTitle.textContent = d.title;
+      modalDesc.textContent = d.desc;
+      modalOverlay.classList.add('open');
+    }
+    function closeModal(){
+      modalOverlay.classList.remove('open');
+    }
+
+    document.querySelectorAll('.score-item').forEach(function(el){
+      el.addEventListener('click', function(){
+        openModal(el.getAttribute('data-dest'));
+      });
+    });
+
+    modalClose.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', function(e){
+      if(e.target === modalOverlay) closeModal();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') closeModal();
+    });
+
+    // Background music: try to play immediately on load.
+    // Some mobile browsers block unmuted autoplay until the very first
+    // tap/touch on the page — if that happens, we just start it on that
+    // first touch instead, so it still plays essentially right away.
+    var bgm = document.getElementById('bgm');
+    if(bgm){
+      bgm.volume = 0.6;
+      var startMusic = function(){
+        var p = bgm.play();
+        if(p !== undefined){
+          p.then(function(){
+            document.removeEventListener('touchstart', startMusic);
+            document.removeEventListener('click', startMusic);
+          }).catch(function(){
+            document.addEventListener('touchstart', startMusic, { once:true });
+            document.addEventListener('click', startMusic, { once:true });
+          });
+        }
+      };
+      window.addEventListener('load', startMusic);
+    }
+  </script>
 </body>
 </html>
