@@ -1,127 +1,330 @@
-<div class="card">
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎂 Birthday Adventure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f7edd6;
+    --paper-dark:#efdfb8;
+    --ink:#4a3222;
+    --brown:#8c5a2b;
+    --brown-dark:#6b4423;
+    --green:#4b6b3f;
+    --green-dark:#33492b;
+    --gold:#c9962c;
+  }
 
-    <h1>🎂 Birthday Adventure</h1>
+  *{ box-sizing:border-box; }
 
-    <div class="subtitle">
-        Welcome, Explorer.
-    </div>
+  body{
+    margin:0;
+    padding:24px 12px 60px;
+    min-height:100vh;
+    font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC",sans-serif;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(255,255,255,0.15) 0, transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(255,255,255,0.1) 0, transparent 40%),
+      linear-gradient(160deg, #dfe9c8 0%, #c7d9a8 45%, #a9c688 100%);
+    position:relative;
+    overflow-x:hidden;
+  }
 
-    <div class="section">
+  body::before, body::after{
+    content:"🌿";
+    position:fixed;
+    font-size:70px;
+    opacity:0.5;
+    pointer-events:none;
+    z-index:0;
+  }
+  body::before{ top:-10px; left:-20px; transform:rotate(-20deg); }
+  body::after{ bottom:-10px; right:-20px; transform:rotate(160deg); }
 
-        <h2>📜 探險者手冊</h2>
+  .frame{
+    max-width:600px;
+    margin:0 auto;
+    position:relative;
+    z-index:1;
+    padding:22px;
+    background:linear-gradient(160deg, #6f8f52, #4b6b3f 60%, #33492b);
+    border-radius:32px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.25);
+  }
 
-        <p>
-            歡迎來到今年的生日冒險。<br><br>
+  .frame::before, .frame::after{
+    content:"🍃";
+    position:absolute;
+    font-size:34px;
+    z-index:2;
+    pointer-events:none;
+  }
+  .frame::before{ top:-6px; left:14px; transform:rotate(-25deg); }
+  .frame::after{ bottom:-6px; right:14px; transform:rotate(155deg); }
 
-            從現在開始，妳將化身為一位探險家。<br><br>
+  .compass, .chest{
+    position:absolute;
+    font-size:54px;
+    z-index:3;
+    filter:drop-shadow(0 6px 8px rgba(0,0,0,0.25));
+    pointer-events:none;
+  }
+  .compass{ top:-22px; left:-14px; transform:rotate(-12deg); }
+  .chest{ top:-18px; right:-14px; transform:rotate(10deg); }
 
-            在家中的某個角落，藏著幾張神秘的便利貼。<br><br>
+  .card{
+    position:relative;
+    background:
+      radial-gradient(circle at 10% 10%, rgba(255,255,255,0.4), transparent 20%),
+      var(--paper);
+    border-radius:24px;
+    padding:34px 22px 26px;
+    box-shadow:inset 0 0 0 2px rgba(140,90,43,0.25), inset 0 0 30px rgba(140,90,43,0.08);
+  }
 
-            每張便利貼都代表著不同的旅行積分，而這些積分，將決定今年生日旅行的目的地。<br><br>
-
-            究竟最後能累積多少分，就看妳是否能找到所有線索了。
-        </p>
-
-    </div>
-
-    <div class="section">
-
-        <h2>📖 遊戲規則</h2>
-
-        <ul class="rule">
-
-            <li>🏠 家中藏有數張便利貼，每張都有不同的分數。</li>
-
-            <li>⭐ 找到便利貼後，請妥善保管，並記錄上面的分數。</li>
-
-            <li>➕ 將所有找到的分數加總，即可解鎖對應的生日旅行。</li>
-
-        </ul>
-
-    </div>
-
-    <div class="section">
-
-        <h2>✈️ 旅行獎勵</h2>
-
-        <div class="score">
-
-            <div>
-                <span>🏝️ 6 分以上</span>
-                <span>富國島旅行</span>
-            </div>
-
-            <div>
-                <span>🌄 3 分以上</span>
-                <span>花東旅行</span>
-            </div>
-
-            <div>
-                <span>🏮 1 分以上</span>
-                <span>台南旅行</span>
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="section">
-
-        <h2>💡 提示規則</h2>
-
-        <p>
-
-            如果妳需要提示，可以向主辦人申請。<br><br>
-
-            不過，提示不是免費的。<br><br>
-
-            每獲得一次提示，都必須拿出指定的物品作為交換。<br><br>
-
-            是否要使用提示，就由妳自己決定囉。
-
-        </p>
-
-    </div>
-
-    <div class="section">
-
-        <h2>📅 活動期間</h2>
-
-        <p style="text-align:center;font-size:22px;font-weight:bold;">
-            即日起 ～ 2026 / 08 / 02
-        </p>
-
-        <p style="text-align:center;">
-            活動結束前，都可以繼續尋找線索。<br>
-            找到越多，旅行就越精彩。
-        </p>
-
-    </div>
-
-    <div class="footer">
-
-        真正的寶藏，<br>
-        或許不是便利貼。<br><br>
-
-        而是我們一起完成這場生日冒險的回憶。
-
-    </div>
-
-   <div class="start">
-
-    🚀 旅程，正式開始！
-
-</div>
-
-<div style="
-    margin-top:25px;
+  .title-wrap{
     text-align:center;
-    color:#999;
-    font-size:14px;
+    margin-bottom:22px;
+  }
+
+  .cake{ font-size:2rem; display:block; margin-bottom:2px; }
+
+  h1{
+    font-family:"Baloo 2", sans-serif;
+    font-weight:800;
+    font-size:2.1rem;
+    line-height:1.15;
+    margin:4px 0 14px;
+    color:var(--brown-dark);
+    text-shadow:1px 1px 0 rgba(255,255,255,0.5);
+  }
+
+  .subtitle{
+    display:inline-block;
+    background:var(--paper-dark);
+    border:2px dashed var(--gold);
+    border-radius:999px;
+    padding:6px 22px;
+    font-weight:700;
+    letter-spacing:1px;
+    color:var(--brown);
+    font-size:0.9rem;
+  }
+
+  .section{
+    background:rgba(255,255,255,0.35);
+    border:2px dashed rgba(140,90,43,0.45);
+    border-radius:18px;
+    padding:18px 18px 16px;
+    margin-bottom:18px;
+  }
+  .section:nth-child(odd){ transform:rotate(-0.4deg); }
+  .section:nth-child(even){ transform:rotate(0.4deg); }
+
+  h2{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:1.08rem;
+    color:var(--green-dark);
+    margin:0 0 10px;
+    padding-bottom:8px;
+    border-bottom:2px dotted var(--gold);
+  }
+
+  p{
+    margin:0;
+    line-height:1.95;
+    color:var(--ink);
+    font-size:0.96rem;
+  }
+
+  ul.rule{
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+  ul.rule li{
+    display:flex;
+    align-items:flex-start;
+    gap:8px;
+    line-height:1.8;
+    color:var(--ink);
+    font-size:0.96rem;
+    margin-bottom:10px;
+  }
+  ul.rule li:last-child{ margin-bottom:0; }
+
+  .score{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    justify-content:center;
+  }
+  .score-item{
+    flex:1 1 140px;
+    border-radius:16px;
+    padding:16px 10px 14px;
+    text-align:center;
+    color:#fff;
+    box-shadow:0 6px 14px rgba(0,0,0,0.15);
+  }
+  .score-item .emoji{ font-size:1.9rem; display:block; margin-bottom:6px; }
+  .score-item .pts{ font-size:0.85rem; font-weight:600; opacity:0.95; }
+  .score-item .place{ font-size:1.15rem; font-weight:800; margin-top:4px; }
+
+  .island{ background:linear-gradient(160deg,#4bb4d1,#2c7fa0); }
+  .mountain{ background:linear-gradient(160deg,#7fae5a,#4c7a3f); }
+  .lantern{ background:linear-gradient(160deg,#e08a3c,#c1502e); }
+
+  .hint-list{ list-style:none; margin:0; padding:0; }
+  .hint-list li{
+    display:flex; align-items:flex-start; gap:8px;
+    line-height:1.8; color:var(--ink); font-size:0.96rem;
+    margin-bottom:8px;
+  }
+  .hint-list li:last-child{ margin-bottom:0; }
+
+  .date-badge{
+    text-align:center;
+    font-size:1.3rem;
+    font-weight:800;
+    color:var(--brown-dark);
+    background:var(--paper-dark);
+    border:2px dashed var(--gold);
+    border-radius:12px;
+    padding:10px;
+    margin-bottom:12px;
+  }
+
+  .footer{
+    text-align:center;
+    border-top:2px dashed var(--gold);
+    margin-top:6px;
+    padding-top:22px;
+    font-style:italic;
+    color:var(--brown-dark);
+    line-height:1.9;
+    font-size:0.95rem;
+  }
+
+  .start{
+    display:block;
+    width:fit-content;
+    margin:22px auto 0;
+    background:linear-gradient(160deg, var(--brown), var(--brown-dark));
+    color:var(--paper);
+    font-weight:800;
+    font-size:1.15rem;
+    letter-spacing:1px;
+    padding:14px 34px;
+    border-radius:12px;
+    box-shadow:0 5px 0 #4a2f18, 0 10px 18px rgba(0,0,0,0.25);
+    font-style:normal;
+  }
+
+  .credit{
+    margin-top:18px;
+    text-align:center;
+    color:#8a7a5c;
+    font-size:0.8rem;
     letter-spacing:1px;
     font-style:italic;
-">
+  }
 
-    Made with love by 維庭 ❤️
+  @media (max-width:420px){
+    h1{ font-size:1.7rem; }
+    .compass, .chest{ font-size:40px; }
+  }
+</style>
+</head>
+<body>
 
-</div>
+  <div class="frame">
+    <span class="compass">🧭</span>
+    <span class="chest">🗺️</span>
+
+    <div class="card">
+
+      <div class="title-wrap">
+        <span class="cake">🎂</span>
+        <h1>Birthday<br>Adventure</h1>
+        <div class="subtitle">Welcome, Explorer.</div>
+      </div>
+
+      <div class="section">
+        <h2>📜 探險者手冊</h2>
+        <p>
+          歡迎來到今年的生日冒險。<br><br>
+          從現在開始，妳將化身為一位探險家。<br><br>
+          在家中的某個角落，藏著幾張神秘的便利貼。<br><br>
+          每張便利貼都代表著不同的旅行積分，而這些積分，將決定今年生日旅行的目的地。<br><br>
+          究竟最後能累積多少分，就看妳是否能找到所有線索了。
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>📖 遊戲規則</h2>
+        <ul class="rule">
+          <li>🏠 家中藏有數張便利貼，每張都有不同的分數。</li>
+          <li>⭐ 找到便利貼後，請妥善保管，並記錄上面的分數。</li>
+          <li>➕ 將所有找到的分數加總，即可解鎖對應的生日旅行。</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>✈️ 旅行獎勵</h2>
+        <div class="score">
+          <div class="score-item island">
+            <span class="emoji">🏝️</span>
+            <span class="pts">6 分以上</span>
+            <span class="place">富國島旅行</span>
+          </div>
+          <div class="score-item mountain">
+            <span class="emoji">🌄</span>
+            <span class="pts">3 分以上</span>
+            <span class="place">花東旅行</span>
+          </div>
+          <div class="score-item lantern">
+            <span class="emoji">🏮</span>
+            <span class="pts">1 分以上</span>
+            <span class="place">台南旅行</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>💡 提示規則</h2>
+        <ul class="hint-list">
+          <li>🎁 如果妳需要提示，可以向主辦人申請。</li>
+          <li>👜 不過，提示不是免費的。</li>
+          <li>🤔 每獲得一次提示，都必須拿出指定的物品作為交換。</li>
+          <li>💭 是否要使用提示，就由妳自己決定囉。</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>📅 活動期間</h2>
+        <div class="date-badge">即日起 ～ 2026 / 08 / 02</div>
+        <p style="text-align:center;">
+          活動結束前，都可以繼續尋找線索。<br>
+          找到越多，旅行就越精彩。
+        </p>
+      </div>
+
+      <div class="footer">
+        真正的寶藏，或許不是便利貼。<br>
+        而是我們一起完成這場生日冒險的回憶。
+        <div class="start">🚀 旅程，正式開始！</div>
+      </div>
+
+      <div class="credit">Made with love by 維庭 ❤️</div>
+
+    </div>
+  </div>
+
+</body>
+</html>
