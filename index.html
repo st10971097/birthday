@@ -141,6 +141,7 @@
     justify-content:center;
   }
   .hint-btn{
+    position:relative;
     flex:1 1 90px;
     background:linear-gradient(160deg, var(--brown), var(--brown-dark));
     color:var(--paper);
@@ -152,6 +153,25 @@
     cursor:pointer;
     box-shadow:0 4px 0 #4a2f18;
     transition:transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
+  }
+  .hint-btn.found{
+    box-shadow:0 4px 0 #4a2f18, 0 0 0 3px var(--gold);
+  }
+  .found-badge{
+    position:absolute;
+    top:-12px;
+    right:-8px;
+    width:26px;
+    height:26px;
+    border-radius:50%;
+    background:var(--gold);
+    color:#5a3c00;
+    font-size:0.95rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 2px 6px rgba(0,0,0,0.35);
+    border:2px solid var(--paper);
   }
   .hint-btn:active{ transform:translateY(2px); box-shadow:0 2px 0 #4a2f18; }
   .hint-btn.locked{
@@ -175,6 +195,16 @@
     margin-top:0;
     transition:max-height 0.4s ease, opacity 0.3s ease, padding 0.4s ease, margin 0.4s ease;
   }
+  .answer-tag{
+    display:block;
+    margin-top:12px;
+    padding-top:10px;
+    border-top:1px dashed var(--gold);
+    font-weight:800;
+    color:var(--green-dark);
+    font-size:1rem;
+  }
+
   .hint-panel.open{
     max-height:300px;
     opacity:1;
@@ -577,15 +607,18 @@
           每張便利貼，都藏著不同的旅行積分，最終將決定妳能解鎖哪一段旅程。<br>
           現在，出發吧。真正的寶藏，只留給願意尋找的人。
         </p>
+        <p style="margin-top:12px; font-size:0.85rem; text-align:center; opacity:0.85;">
+          ✏️ 本手冊會隨著冒險期間發生的狀況隨時更新，記得三不五時回來看看。
+        </p>
       </div>
 
       <div class="section">
         <h2>🔍 出發提示</h2>
         <p style="margin-bottom:14px;">這三個提示一開始就交給妳了，點開想想看，答案就藏在家裡某個地方。</p>
         <div class="hint-btns">
-          <button class="hint-btn" data-target="hintPanel1" type="button">提示一</button>
-          <button class="hint-btn" data-target="hintPanel2" type="button">提示二</button>
-          <button class="hint-btn" data-target="hintPanel3" type="button">提示三</button>
+          <button class="hint-btn" data-target="hintPanel1" type="button">謎題一</button>
+          <button class="hint-btn found" data-target="hintPanel2" type="button">謎題二<span class="found-badge">🏆</span></button>
+          <button class="hint-btn" data-target="hintPanel3" type="button">謎題三</button>
         </div>
         <div class="hint-panel" id="hintPanel1">
           我沒有嘴巴，<br>
@@ -599,6 +632,7 @@
           你的眼睛總看著我的上面；<br>
           這一次，<br>
           換個角度看看我吧。
+          <span class="answer-tag">🎯 Answer：茶几</span>
         </div>
         <div class="hint-panel" id="hintPanel3">
           今天的答案，<br>
