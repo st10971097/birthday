@@ -131,6 +131,56 @@
   .section:nth-child(3){ animation-delay:1.05s; }
   .section:nth-child(4){ animation-delay:1.25s; }
   .section:nth-child(5){ animation-delay:1.45s; }
+  .section:nth-child(6){ animation-delay:1.65s; }
+  .section:nth-child(7){ animation-delay:1.85s; }
+
+  .hint-btns{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .hint-btn{
+    flex:1 1 90px;
+    background:linear-gradient(160deg, var(--brown), var(--brown-dark));
+    color:var(--paper);
+    font-weight:800;
+    font-size:0.95rem;
+    border:none;
+    border-radius:12px;
+    padding:12px 8px;
+    cursor:pointer;
+    box-shadow:0 4px 0 #4a2f18;
+    transition:transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
+  }
+  .hint-btn:active{ transform:translateY(2px); box-shadow:0 2px 0 #4a2f18; }
+  .hint-btn.locked{
+    background:linear-gradient(160deg, #9a9a8f, #6f6f66);
+    box-shadow:0 4px 0 #4a4a42;
+  }
+  .hint-btn.active{ background:linear-gradient(160deg, var(--green), var(--green-dark)); }
+
+  .hint-panel{
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+    text-align:center;
+    line-height:1.9;
+    color:var(--ink);
+    font-size:0.95rem;
+    background:var(--paper-dark);
+    border:2px dashed var(--gold);
+    border-radius:12px;
+    padding:0 14px;
+    margin-top:0;
+    transition:max-height 0.4s ease, opacity 0.3s ease, padding 0.4s ease, margin 0.4s ease;
+  }
+  .hint-panel.open{
+    max-height:300px;
+    opacity:1;
+    padding:14px;
+    margin-top:12px;
+  }
 
   h2{
     display:flex;
@@ -207,9 +257,10 @@
   .modal-card{
     background:var(--paper);
     border-radius:22px;
-    max-width:420px;
+    max-width:520px;
     width:100%;
-    overflow:hidden;
+    max-height:90vh;
+    overflow-y:auto;
     box-shadow:0 24px 50px rgba(0,0,0,0.4);
     transform:scale(0.9) translateY(12px);
     transition:transform 0.25s ease;
@@ -219,9 +270,11 @@
 
   .modal-card img{
     width:100%;
-    height:250px;
-    object-fit:cover;
+    height:auto;
+    max-height:75vh;
+    object-fit:contain;
     display:block;
+    background:var(--paper-dark);
   }
 
   .modal-caption{ padding:16px 20px 22px; text-align:center; }
@@ -271,6 +324,45 @@
     margin-bottom:12px;
   }
 
+  .countdown{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin:0 0 14px;
+  }
+  .cd-item{
+    background:var(--paper-dark);
+    border:2px dashed var(--gold);
+    border-radius:12px;
+    padding:8px 4px;
+    min-width:54px;
+    text-align:center;
+  }
+  .cd-num{
+    display:block;
+    font-size:1.3rem;
+    font-weight:800;
+    color:var(--brown-dark);
+    font-variant-numeric:tabular-nums;
+  }
+  .cd-label{
+    display:block;
+    font-size:0.68rem;
+    color:var(--brown);
+    margin-top:2px;
+  }
+  .cd-over{
+    text-align:center;
+    font-weight:800;
+    font-size:1.05rem;
+    color:var(--brown-dark);
+    padding:10px;
+    background:var(--paper-dark);
+    border:2px dashed var(--gold);
+    border-radius:12px;
+    margin-bottom:14px;
+  }
+
   .footer{
     text-align:center;
     border-top:2px dashed var(--gold);
@@ -280,7 +372,7 @@
     color:var(--brown-dark);
     line-height:1.9;
     font-size:0.95rem;
-    animation:fadeInUp 0.7s 1.65s ease-out both;
+    animation:fadeInUp 0.7s 2.05s ease-out both;
   }
 
   .start{
@@ -296,7 +388,7 @@
     border-radius:12px;
     box-shadow:0 5px 0 #4a2f18, 0 10px 18px rgba(0,0,0,0.25);
     font-style:normal;
-    animation:bounceIn 0.7s 1.9s ease-out both;
+    animation:bounceIn 0.7s 2.3s ease-out both;
     cursor:pointer;
     user-select:none;
     transition:transform 0.15s ease, filter 0.15s ease;
@@ -308,19 +400,24 @@
     position:fixed;
     left:0;
     top:0;
-    font-size:2.1rem;
+    width:64px;
     z-index:80;
     opacity:0;
     pointer-events:none;
-    filter:drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+    filter:drop-shadow(0 6px 10px rgba(0,0,0,0.35));
     will-change:transform, opacity;
+  }
+  .adventurer img{
+    display:block;
+    width:100%;
+    height:auto;
   }
   .adventurer::after{
     content:"💨";
     position:absolute;
-    left:-16px;
-    top:8px;
-    font-size:1.1rem;
+    left:-18px;
+    top:45%;
+    font-size:1.2rem;
     opacity:0;
   }
   .adventurer.run{
@@ -350,7 +447,44 @@
     font-size:0.8rem;
     letter-spacing:1px;
     font-style:italic;
-    animation:fadeInUp 0.6s 2.1s ease-out both;
+    animation:fadeInUp 0.6s 2.5s ease-out both;
+  }
+
+  .explorer-photo{
+    margin-top:24px;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    gap:12px;
+    animation:fadeInUp 0.7s 2.7s ease-out both;
+  }
+  .explorer-photo-item{
+    flex:1 1 0;
+    max-width:150px;
+  }
+  .explorer-photo-item img{
+    width:100%;
+    height:auto;
+    display:block;
+    border-radius:14px;
+    border:5px solid var(--paper-dark);
+    box-shadow:0 10px 20px rgba(0,0,0,0.25);
+    cursor:pointer;
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .explorer-photo-item img:hover{
+    box-shadow:0 14px 26px rgba(0,0,0,0.32);
+  }
+  .explorer-photo-item img:active{ transform:scale(0.96); }
+  .explorer-photo-item:nth-child(1) img{ transform:rotate(-2deg); }
+  .explorer-photo-item:nth-child(2) img{ transform:rotate(2deg); }
+  .explorer-caption{
+    margin-top:12px;
+    text-align:center;
+    font-size:0.85rem;
+    color:var(--brown-dark);
+    font-style:italic;
+    animation:fadeInUp 0.7s 2.8s ease-out both;
   }
 
   @media (max-width:420px){
@@ -407,7 +541,7 @@
 </head>
 <body>
 
-  <div class="adventurer" id="adventurer">🏃‍♀️</div>
+  <div class="adventurer" id="adventurer"><img src="images/S__152821778.png" alt="出發冒險"></div>
 
   <audio id="bgm" src="music/theme.mp3" loop preload="auto"></audio>
 
@@ -437,12 +571,41 @@
       <div class="section">
         <h2>📜 探險者手冊</h2>
         <p>
-          歡迎來到今年的生日冒險。<br><br>
-          從現在開始，妳將化身為一位探險家。<br><br>
-          在家中的某個角落，藏著幾張神秘的便利貼。<br><br>
-          每張便利貼都代表著不同的旅行積分，而這些積分，將決定今年生日旅行的目的地。<br><br>
-          究竟最後能累積多少分，就看妳是否能找到所有線索了。
+          歡迎來到今年的生日冒險。<br>
+          從此刻起，妳就是這座「家」裡最勇敢的探險家。<br>
+          某個角落，藏著幾張等待被發現的神秘便利貼——那是通往寶藏的線索。<br>
+          每張便利貼，都藏著不同的旅行積分，最終將決定妳能解鎖哪一段旅程。<br>
+          現在，出發吧。真正的寶藏，只留給願意尋找的人。
         </p>
+      </div>
+
+      <div class="section">
+        <h2>🔍 出發提示</h2>
+        <p style="margin-bottom:14px;">這三個提示一開始就交給妳了，點開想想看，答案就藏在家裡某個地方。</p>
+        <div class="hint-btns">
+          <button class="hint-btn" data-target="hintPanel1" type="button">提示一</button>
+          <button class="hint-btn" data-target="hintPanel2" type="button">提示二</button>
+          <button class="hint-btn" data-target="hintPanel3" type="button">提示三</button>
+        </div>
+        <div class="hint-panel" id="hintPanel1">
+          我沒有嘴巴，<br>
+          卻總是把東西吞進去；<br>
+          我沒有手，<br>
+          卻每天幫我們整理外表。<br>
+          打開我看看。
+        </div>
+        <div class="hint-panel" id="hintPanel2">
+          每次吃飯，<br>
+          你的眼睛總看著我的上面；<br>
+          這一次，<br>
+          換個角度看看我吧。
+        </div>
+        <div class="hint-panel" id="hintPanel3">
+          今天的答案，<br>
+          不在角落，也不在抽屜。<br>
+          它會陪著你一起出門，<br>
+          卻總是最容易被忽略。
+        </div>
       </div>
 
       <div class="section">
@@ -452,6 +615,37 @@
           <li>⭐ 找到便利貼後，請妥善保管，並記錄上面的分數。</li>
           <li>➕ 將所有找到的分數加總，即可解鎖對應的生日旅行。</li>
         </ul>
+      </div>
+
+      <div class="section">
+        <h2>🃏 特殊卡片</h2>
+        <ul class="rule">
+          <li>🔎 提示卡 x4：找到後可以直接向主辦人兌換一次提示。</li>
+          <li>🗝️ 關鍵線索卡 x2：非常重要，是找到便利貼分數的關鍵指引，千萬別錯過。</li>
+          <li>⚠️ 陷阱卡 x6：找到不會扣分，但內容可能會故意誤導方向，要自己判斷真假。</li>
+        </ul>
+
+        <p style="margin-top:14px; font-size:0.85rem; text-align:center; opacity:0.85;">
+          找到卡片之前先鎖著，找到之後主辦人會幫妳補上內容 🔒
+        </p>
+
+        <div class="hint-btns" style="margin-top:10px;">
+          <button class="hint-btn locked" data-target="findCard1" type="button">提示卡 1</button>
+          <button class="hint-btn locked" data-target="findCard2" type="button">提示卡 2</button>
+          <button class="hint-btn locked" data-target="findCard3" type="button">提示卡 3</button>
+          <button class="hint-btn locked" data-target="findCard4" type="button">提示卡 4</button>
+        </div>
+        <div class="hint-panel" id="findCard1">🔒 尚未解鎖，找到後會更新在這裡。</div>
+        <div class="hint-panel" id="findCard2">🔒 尚未解鎖，找到後會更新在這裡。</div>
+        <div class="hint-panel" id="findCard3">🔒 尚未解鎖，找到後會更新在這裡。</div>
+        <div class="hint-panel" id="findCard4">🔒 尚未解鎖，找到後會更新在這裡。</div>
+
+        <div class="hint-btns" style="margin-top:12px;">
+          <button class="hint-btn locked" data-target="keyClue1" type="button">關鍵線索 1</button>
+          <button class="hint-btn locked" data-target="keyClue2" type="button">關鍵線索 2</button>
+        </div>
+        <div class="hint-panel" id="keyClue1">🔒 尚未解鎖，找到後會更新在這裡。</div>
+        <div class="hint-panel" id="keyClue2">🔒 尚未解鎖，找到後會更新在這裡。</div>
       </div>
 
       <div class="section">
@@ -491,6 +685,14 @@
       <div class="section">
         <h2>📅 活動期間</h2>
         <div class="date-badge">即日起 ～ 2026 / 08 / 02</div>
+
+        <div class="countdown" id="countdown">
+          <div class="cd-item"><span class="cd-num" id="cdDays">00</span><span class="cd-label">天</span></div>
+          <div class="cd-item"><span class="cd-num" id="cdHours">00</span><span class="cd-label">時</span></div>
+          <div class="cd-item"><span class="cd-num" id="cdMins">00</span><span class="cd-label">分</span></div>
+          <div class="cd-item"><span class="cd-num" id="cdSecs">00</span><span class="cd-label">秒</span></div>
+        </div>
+
         <p style="text-align:center;">
           活動結束前，都可以繼續尋找線索。<br>
           找到越多，旅行就越精彩。
@@ -505,6 +707,16 @@
 
       <div class="credit">Made with love by 維庭 ❤️</div>
 
+      <div class="explorer-photo">
+        <div class="explorer-photo-item">
+          <img src="images/S__152821776.jpg" alt="我們的探險家宣言照" data-title="🧭 我們的探險宣言" data-desc="本次冒險，我們一起出發。">
+        </div>
+        <div class="explorer-photo-item">
+          <img src="images/S__152821777.jpg" alt="探險家與貓咪們" data-title="🐾 探險家與貓咪們" data-desc="這次連隊友也帶上了。">
+        </div>
+      </div>
+      <div class="explorer-caption">🧭 本次冒險，我們一起出發</div>
+
     </div>
   </div>
 
@@ -515,8 +727,8 @@
     if(startBtn && adventurer){
       startBtn.addEventListener('click', function(){
         var rect = startBtn.getBoundingClientRect();
-        adventurer.style.left = (rect.left + rect.width / 2 - 17) + 'px';
-        adventurer.style.top = (rect.top - 6) + 'px';
+        adventurer.style.left = (rect.left + rect.width / 2 - 32) + 'px';
+        adventurer.style.top = (rect.top - 60) + 'px';
 
         adventurer.classList.remove('run');
         void adventurer.offsetWidth; // restart animation on repeat clicks
@@ -579,6 +791,25 @@
       if(e.key === 'Escape') closeModal();
     });
 
+    document.querySelectorAll('.explorer-photo-item img').forEach(function(img){
+      img.addEventListener('click', function(){
+        modalImg.src = img.getAttribute('src');
+        modalImg.alt = img.getAttribute('alt') || '';
+        modalTitle.textContent = img.getAttribute('data-title') || img.getAttribute('alt') || '';
+        modalDesc.textContent = img.getAttribute('data-desc') || '';
+        modalOverlay.classList.add('open');
+      });
+    });
+
+    document.querySelectorAll('.hint-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var panel = document.getElementById(btn.getAttribute('data-target'));
+        if(!panel) return;
+        var isOpen = panel.classList.toggle('open');
+        btn.classList.toggle('active', isOpen);
+      });
+    });
+
     // Background music: try to play immediately on load.
     // Some mobile browsers block unmuted autoplay until the very first
     // tap/touch on the page — if that happens, we just start it on that
@@ -600,6 +831,42 @@
       };
       window.addEventListener('load', startMusic);
     }
+
+    // Countdown to 2026/08/02 23:59:59 (local time)
+    (function(){
+      var deadline = new Date(2026, 7, 2, 23, 59, 59).getTime();
+      var countdownEl = document.getElementById('countdown');
+      var cdDays = document.getElementById('cdDays');
+      var cdHours = document.getElementById('cdHours');
+      var cdMins = document.getElementById('cdMins');
+      var cdSecs = document.getElementById('cdSecs');
+      if(!countdownEl || !cdDays) return;
+
+      function pad(n){
+        n = Math.max(0, n);
+        return n < 10 ? '0' + n : String(n);
+      }
+
+      function tick(){
+        var diff = deadline - Date.now();
+        if(diff <= 0){
+          countdownEl.innerHTML = '<div class="cd-over">⏰ 活動已結束</div>';
+          clearInterval(timer);
+          return;
+        }
+        var d = Math.floor(diff / 86400000);
+        var h = Math.floor((diff % 86400000) / 3600000);
+        var m = Math.floor((diff % 3600000) / 60000);
+        var s = Math.floor((diff % 60000) / 1000);
+        cdDays.textContent = pad(d);
+        cdHours.textContent = pad(h);
+        cdMins.textContent = pad(m);
+        cdSecs.textContent = pad(s);
+      }
+
+      tick();
+      var timer = setInterval(tick, 1000);
+    })();
   </script>
 </body>
 </html>
